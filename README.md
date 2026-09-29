@@ -41,8 +41,7 @@ abandoned-but-not-forgotten/
 │   ├── quiz.js             # Quiz logic
 │   ├── sources.js          # Sources page logic
 │   └── svg-icons.js        # SVG icons repository
-└── assets/                 # Images and icons
 
-## Developed By
+Developed By
 Maliha Tabassum Hridila
 Nuhza Suraia
