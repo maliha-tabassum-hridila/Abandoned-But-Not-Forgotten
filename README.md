@@ -5,7 +5,7 @@ Welcome to **Abandoned But Not Forgotten**, developed for the **NASA Space Apps 
 ## 🌍 About the Project
 Our project focuses on exploring, tracking, and raising awareness about abandoned spacecraft, defunct satellites, space debris, and forgotten space exploration artifacts. We aim to bring light to the silent history lingering in our orbits and beyond through an interactive and engaging web platform.
 
-## Live Demo ## : https://maliha-tabassum-hridila.github.io/Abandoned-But-Not-Forgotten/
+## Live Demo : https://maliha-tabassum-hridila.github.io/Abandoned-But-Not-Forgotten/
 
 ## ✨ Features
 * **Interactive Timeline:** Explore the chronological history of abandoned space missions.
@@ -44,6 +44,6 @@ abandoned-but-not-forgotten/
 │   ├── sources.js          # Sources page logic
 │   └── svg-icons.js        # SVG icons repository
 
-Developed By
+Developed By -
 Maliha Tabassum Hridila
 Nuhza Suraia
