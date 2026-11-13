@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond the Landing — Abandoned, But Not Forgotten</title>
+<meta name="description" content="Explore an illustrative Mars surface scene of hardware left behind by all 15 archive missions.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23cf6a34%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Orbitron:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="explore-body">
+
+<canvas id="starfield" aria-hidden="true"></canvas>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-mark" aria-hidden="true"></span>
+      <span class="nav-brand-text">Abandoned, But Not Forgotten<small>NASA Space Apps 2026</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="missions.html">Archive</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li><a href="explore.html" aria-current="page">Explore</a></li>
+      <li><a href="inspect.html">Inspect</a></li>
+      <li class="nav-more">
+        <button type="button" class="nav-more-btn" aria-expanded="false" aria-haspopup="true" data-i18n="nav.more">More</button>
+        <ul class="nav-more-list">
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="detective.html">Detective</a></li>
+        <li><a href="game.html">Space Game</a></li>
+        <li><a href="final-signal.html">Final Signal</a></li>
+        <li><a href="data.html">NASA Data</a></li>
+        <li><a href="about.html">About</a></li>
+        </ul>
+      </li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span>
+    </button>
+  </nav>
+</header>
+
+<main id="main" class="explore-main">
+
+  <section class="explore-intro" id="explore-intro">
+    <div class="explore-intro-bg" aria-hidden="true"></div>
+    <div class="wrap explore-intro-inner">
+      <span class="eyebrow">INTERACTIVE MARS SCENE</span>
+      <h1>BEYOND THE LANDING</h1>
+      <p class="explore-kicker">Every mission leaves a story behind.</p>
+      <p>Explore the traces of human exploration across Mars.</p>
+      <p class="map-note">This is an educational visualization, not an official NASA product. Hotspot positions are illustrative. Facts come from the same mission records used in the archive.</p>
+
+      <div class="explore-mission-pick" role="group" aria-label="Choose a Mars mission">
+        <span class="flabel">MISSION</span>
+        <div class="explore-pills" id="explore-pills"></div>
+      </div>
+
+      <div class="hero-ctas">
+        <button type="button" class="btn btn-primary" id="explore-start">Explore the Surface</button>
+        <a class="btn btn-secondary" href="missions.html">Discover the Missions</a>
+        <a class="btn btn-secondary" href="game.html">Play Space Game</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="explore-stage" id="explore-stage" hidden>
+    <div class="explore-toolbar wrap">
+      <button type="button" class="btn btn-secondary btn-small" id="explore-back">Back</button>
+      <label class="visually-hidden" for="stage-mission">Switch mission</label>
+      <select id="stage-mission" class="explore-select"></select>
+      <button type="button" class="btn btn-secondary btn-small" id="explore-skip">Skip Animation</button>
+      <button type="button" class="btn btn-secondary btn-small" id="explore-replay" hidden>Replay Landing</button>
+      <button type="button" class="btn btn-primary btn-small" id="explore-remains">What Remains?</button>
+      <button type="button" class="btn btn-secondary btn-small" id="explore-challenge">Find the Evidence</button>
+    </div>
+
+    <div class="explore-scene" id="explore-scene">
+      <svg class="explore-terrain" viewBox="0 0 1200 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="mars-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0b1020"/>
+            <stop offset="0.38" stop-color="#3a2a3a"/>
+            <stop offset="0.62" stop-color="#c45a28"/>
+            <stop offset="1" stop-color="#e08a4a"/>
+          </linearGradient>
+          <linearGradient id="far-ridge" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#7a3a28"/>
+            <stop offset="1" stop-color="#5a2418"/>
+          </linearGradient>
+          <linearGradient id="mid-ridge" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#b85a32"/>
+            <stop offset="1" stop-color="#6b2c16"/>
+          </linearGradient>
+          <linearGradient id="near-ground" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#c46a3a"/>
+            <stop offset="0.45" stop-color="#8a3a1c"/>
+            <stop offset="1" stop-color="#2a120c"/>
+          </linearGradient>
+          <radialGradient id="sun-glow" cx="0.78" cy="0.28" r="0.28">
+            <stop offset="0" stop-color="#ffd7a0" stop-opacity="0.95"/>
+            <stop offset="0.35" stop-color="#e8925a" stop-opacity="0.35"/>
+            <stop offset="1" stop-color="#e8925a" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect class="explore-layer" data-depth="4" width="1200" height="720" fill="url(#mars-sky)"/>
+        <g class="explore-layer" data-depth="8">
+          <circle cx="920" cy="210" r="210" fill="url(#sun-glow)"/>
+          <circle cx="900" cy="205" r="28" fill="#f4d2a8" opacity="0.85"/>
+        </g>
+        <path class="explore-layer" data-depth="12" fill="url(#far-ridge)" opacity="0.7" d="M0,340 C80,300 140,318 220,292 C320,260 390,310 480,280 C580,246 660,300 760,268 C860,236 940,286 1040,258 C1120,238 1160,270 1200,250 L1200,420 L0,420 Z"/>
+        <path class="explore-layer" data-depth="18" fill="url(#mid-ridge)" d="M0,390 C120,350 200,400 320,362 C430,328 520,390 640,348 C760,304 860,372 980,338 C1080,312 1140,350 1200,328 L1200,520 L0,520 Z"/>
+        <ellipse class="explore-layer" data-depth="10" cx="600" cy="430" rx="640" ry="46" fill="#e8a070" opacity="0.22"/>
+        <path class="explore-layer" data-depth="26" fill="url(#near-ground)" d="M0,470 C160,440 280,500 430,458 C560,424 680,500 820,462 C960,424 1080,490 1200,452 L1200,720 L0,720 Z"/>
+        <g class="explore-layer" data-depth="32" fill="#1a0c08" opacity="0.55">
+          <ellipse cx="90" cy="620" rx="54" ry="18"/>
+          <path d="M60,610 L78,560 L112,612 Z"/>
+          <ellipse cx="1080" cy="600" rx="70" ry="22"/>
+          <path d="M1040,592 L1074,536 L1122,598 Z"/>
+          <ellipse cx="210" cy="670" rx="40" ry="12"/>
+          <path d="M190,664 L214,628 L236,666 Z"/>
+        </g>
+        <g class="explore-layer" data-depth="20" fill="none" stroke="#2a140c" stroke-width="2" opacity="0.35">
+          <path d="M40,640 C180,620 240,655 360,638"/>
+          <path d="M80,668 C200,650 280,680 420,662"/>
+        </g>
+      </svg>
+      <div class="explore-fallback" aria-hidden="true"></div>
+      <img class="explore-photo" id="explore-photo" alt="" hidden>
+      <div class="explore-dust" aria-hidden="true"></div>
+      <div class="explore-haze" aria-hidden="true"></div>
+      <div class="explore-entry" id="explore-entry" aria-hidden="true"></div>
+      <div class="explore-puff" id="explore-puff" aria-hidden="true"></div>
+      <div class="explore-craft" id="explore-craft" aria-hidden="true"></div>
+      <div class="explore-hotspots" id="explore-hotspots"></div>
+      <p class="explore-touchdown" id="explore-touchdown" hidden>Touchdown. A new chapter begins.</p>
+      <span class="explore-badge">Illustrative reconstruction</span>
+    </div>
+
+    <p class="explore-credit wrap" id="explore-credit"></p>
+    <p class="explore-status wrap" id="explore-challenge-status" role="status" aria-live="polite"></p>
+
+    <aside class="explore-panel" id="explore-panel" hidden>
+      <div class="explore-panel-top">
+        <span class="eyebrow">SURFACE FILE</span>
+        <button type="button" class="explore-panel-close" id="explore-panel-close" aria-label="Close information panel">Close</button>
+      </div>
+      <h2 id="explore-panel-title"></h2>
+      <p id="explore-panel-text"></p>
+      <p class="explore-panel-row"><span>Why it matters</span> <span id="explore-panel-why"></span></p>
+      <p class="explore-panel-row"><span>Known status</span> <span id="explore-panel-status"></span></p>
+      <p class="explore-panel-note" id="explore-panel-note"></p>
+      <p class="detective-source" id="explore-panel-source"></p>
+    </aside>
+  </section>
+
+  <div class="explore-overlay" id="explore-overlay" hidden>
+    <div class="explore-overlay-card" role="dialog" aria-labelledby="remains-title" aria-modal="true">
+      <p class="eyebrow" id="remains-title">DISCOVERY LOG — WHAT REMAINS</p>
+      <dl class="explore-dl" id="explore-remains-dl"></dl>
+      <div class="explore-overlay-actions">
+        <a class="btn btn-primary" id="explore-mission-link" href="missions.html">Read the full mission story</a>
+        <button type="button" class="btn btn-secondary" id="explore-overlay-close" aria-label="Close What Remains">Close</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="nav-brand-text" style="margin-bottom:8px;">NASA SPACE APPS CHALLENGE 2026<small>ABANDONED, BUT NOT FORGOTTEN</small></div>
+        <p style="max-width:40ch;">Every piece of hardware left behind is part of humanity's record of exploration.</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="missions.html">Mission Archive</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="explore.html">Explore Mars</a></li>
+        <li><a href="compare.html">Compare Missions</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="detective.html">Mission Detective</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="data.html">NASA Data &amp; Sources</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="footer-year"></span> &mdash; BUILT FOR NASA SPACE APPS CHALLENGE 2026</span>
+      <span>SOURCES: NASA/JPL &bull; NASA SCIENCE &bull; NASA SOLAR SYSTEM EXPLORATION</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/data-extra.js"></script>
+<script src="js/strings-data.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script src="js/explore-scenes.js"></script>
+<script src="js/explore.js"></script>
+<script>
+window.addEventListener("load", function () {
+  if (!getComputedStyle(document.documentElement).getPropertyValue("--space-black").trim()) {
+    var d = document.createElement("div"); d.id = "setup-warning";
+    d.textContent = "Styles did not load. Extract the WHOLE zip folder first (right-click > Extract All), then open index.html from the extracted folder so the css/ and js/ folders sit next to it.";
+    document.body.insertBefore(d, document.body.firstChild);
+  }
+});
+</script>
+</body>
+</html>

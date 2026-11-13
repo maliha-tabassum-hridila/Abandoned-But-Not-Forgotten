@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Abandoned, But Not Forgotten</title>
+<meta name="description" content="Why NASA leaves hardware behind on the Moon, Mars, and in deep space — and why that hardware still matters.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23cf6a34%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Orbitron:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<canvas id="starfield" aria-hidden="true"></canvas>
+<canvas id="about-fx" class="page-fx" aria-hidden="true"></canvas>
+<div id="scroll-progress" aria-hidden="true"></div>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-mark" aria-hidden="true"></span>
+      <span class="nav-brand-text">Abandoned, But Not Forgotten<small>NASA Space Apps 2026</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="missions.html">Archive</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li><a href="explore.html">Explore</a></li>
+      <li><a href="inspect.html">Inspect</a></li>
+      <li class="nav-more">
+        <button type="button" class="nav-more-btn has-current" aria-expanded="false" aria-haspopup="true" data-i18n="nav.more">More</button>
+        <ul class="nav-more-list">
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="detective.html">Detective</a></li>
+        <li><a href="game.html">Space Game</a></li>
+        <li><a href="final-signal.html">Final Signal</a></li>
+        <li><a href="data.html">NASA Data</a></li>
+        <li><a href="about.html" aria-current="page">About</a></li>
+        </ul>
+      </li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span>
+    </button>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="section" style="padding-bottom:0;">
+    <div class="wrap">
+      <span class="eyebrow">ABOUT THE PROJECT</span>
+      <h2 style="font-size:clamp(2rem,4.4vw,3.2rem); margin:8px 0 28px; max-width:18ch;">WHY NASA LEAVES HARDWARE BEHIND</h2>
+      <p style="max-width:66ch; font-size:1.05rem;">Every mission in this archive ended differently, but almost none of them ended by choice in the way people imagine. Spacecraft aren't recalled or driven home. They are built, launched, and then left to work until something &mdash; distance, darkness, dust, or simple time &mdash; brings the mission to a close. Here are the main reasons a NASA mission ends where it stands.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:24px;">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-card reveal" style="--i:0">
+          <svg class="a-ico ico-done" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="18"/><circle class="ring2" cx="24" cy="24" r="10"/><path class="tick" d="M17 24.5l5 5 9-11"/></svg>
+          <span class="a-eyebrow">COMPLETED MISSIONS</span>
+          <h4>The work was finished</h4>
+          <p>Some hardware, like the Surveyor landers, was built to answer a specific question. Once that question was answered, the mission's job was done, whether or not the spacecraft kept transmitting afterward.</p>
+        </div>
+        <div class="about-card reveal" style="--i:1">
+          <svg class="a-ico ico-lost" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="36" r="3" fill="currentColor"/><path class="w1" d="M12 26a10 10 0 0 1 10 10"/><path class="w2" d="M12 17a19 19 0 0 1 19 19"/><path class="w3" d="M12 8a28 28 0 0 1 28 28" stroke-dasharray="3 6"/></svg>
+          <span class="a-eyebrow">LOST CONTACT</span>
+          <h4>The signal never came back</h4>
+          <p>Missions like Opportunity and Pioneer 10 didn't fail so much as they simply stopped being reachable &mdash; buried in dust, out of power, or too far away for a signal to return.</p>
+        </div>
+        <div class="about-card reveal" style="--i:2">
+          <svg class="a-ico ico-env" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="d1" d="M6 15h24a5 5 0 1 0-5-5"/><path class="d2" d="M6 24h32a5 5 0 1 1-5 5"/><path class="d3" d="M6 33h18a4 4 0 1 1-4 4"/></svg>
+          <span class="a-eyebrow">ENVIRONMENTAL LIMITATIONS</span>
+          <h4>The environment won</h4>
+          <p>Extreme cold, punishing dust storms, and the dark of a polar winter have ended more Mars missions than any hardware failure. Spirit and Phoenix were both ultimately stopped by conditions their designers anticipated but couldn't fully protect against.</p>
+        </div>
+        <div class="about-card reveal" style="--i:3">
+          <svg class="a-ico ico-pow" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="16" width="32" height="16" rx="3"/><path d="M42 21v6"/><rect class="lvl" x="10" y="20" width="22" height="8" rx="1.5" fill="currentColor" stroke="none"/></svg>
+          <span class="a-eyebrow">POWER LIMITATIONS</span>
+          <h4>The batteries ran out</h4>
+          <p>Solar panels lose power as dust settles on them; radioisotope generators lose power as their fuel naturally decays. Both are predictable, gradual processes &mdash; InSight and the Pioneer probes were both eventually silenced by fading power.</p>
+        </div>
+        <div class="about-card reveal" style="--i:4">
+          <svg class="a-ico ico-star" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M24 6l5.2 11 12 1.5-8.8 8.3 2.2 11.9L24 32.8 13.4 38.7l2.2-11.9L6.8 18.5l12-1.5z"/></svg>
+          <span class="a-eyebrow">MISSION OBJECTIVES COMPLETED</span>
+          <h4>They outlived their warranty</h4>
+          <p>Many of these machines, including Spirit, Opportunity, and Sojourner, kept working for years past their original planned lifetimes, gathering far more science than anyone expected when they launched.</p>
+        </div>
+        <div class="about-card reveal" style="--i:5">
+          <svg class="a-ico ico-go" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 38C16 36 20 20 30 18s11-8 13-10" stroke-dasharray="2 5"/><circle class="probe" cx="30" cy="18" r="3.5" fill="currentColor"/></svg>
+          <span class="a-eyebrow">CONTINUING JOURNEYS</span>
+          <h4>Some are still going</h4>
+          <p>Voyager 1 and Voyager 2 aren't abandoned in the usual sense at all &mdash; they're still transmitting today, nearly five decades after launch, on a journey with no planned end.</p>
+        </div>
+      </div>
+
+      <div class="about-closer">
+        <p class="big">"Abandoned" doesn't mean "meaningless." Every piece of hardware left behind is part of humanity's record of exploration.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">ABOUT THIS SITE</span>
+          <h2>Built for NASA Space Apps Challenge 2026</h2>
+        </div>
+      </div>
+      <p style="max-width:66ch;">This site was built for the NASA Space Apps Challenge 2026 category "Abandoned but not Forgotten: Storytelling about NASA's Discarded Equipment on the Moon and Mars." It is an independent, non-official project intended for students, teachers, and space enthusiasts. Mission facts, dates, and figures are drawn from NASA and JPL mission pages; any first-person "if this machine could talk" text on mission pages is clearly labeled creative interpretation, not an actual transmission or NASA statement.</p>
+      <p style="max-width:66ch;">Built with HTML, CSS, and vanilla JavaScript &mdash; no framework, no backend and no required build step. The 3D scenes use Three.js (MIT licence), bundled in <code>js/vendor/</code> so they work offline; the Hardware Map can show NASA basemap tiles over the internet and falls back to a built-in grid without it. Open <code>index.html</code> to explore (the 3D game needs a local web server; see the README).</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="nav-brand-text" style="margin-bottom:8px;">NASA SPACE APPS CHALLENGE 2026<small>ABANDONED, BUT NOT FORGOTTEN</small></div>
+        <p style="max-width:40ch;">Every piece of hardware left behind is part of humanity's record of exploration.</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="missions.html">Mission Archive</a></li>
+        <li><a href="explore.html">Explore Mars</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="compare.html">Compare Missions</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="detective.html">Mission Detective</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="data.html">NASA Data &amp; Sources</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="footer-year"></span> &mdash; BUILT FOR NASA SPACE APPS CHALLENGE 2026</span>
+      <span>SOURCES: NASA/JPL &bull; NASA SCIENCE &bull; NASA SOLAR SYSTEM EXPLORATION</span>
+    </div>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 13V3M3 8l5-5 5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+</button>
+
+<script src="js/data.js"></script>
+<script src="js/data-extra.js"></script>
+<script src="js/config.js"></script>
+<script src="js/nasa-api.js"></script>
+<script src="js/strings-data.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script src="js/about-fx.js"></script>
+<script>
+/* If the stylesheet did not load (e.g. index.html opened from inside a zip), tell the user how to fix it. */
+window.addEventListener("load", function () {
+  if (!getComputedStyle(document.documentElement).getPropertyValue("--space-black").trim()) {
+    var d = document.createElement("div"); d.id = "setup-warning";
+    d.textContent = "Styles did not load. Extract the WHOLE zip folder first (right-click > Extract All), then open index.html from the extracted folder so the css/ and js/ folders sit next to it.";
+    document.body.insertBefore(d, document.body.firstChild);
+  }
+});
+</script>
+</body>
+</html>

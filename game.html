@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Space Explorer: Their Legacy — Abandoned, But Not Forgotten</title>
+<meta name="description" content="A third-person 3D exploration game: create an astronaut, visit the Moon, Mars and Deep Space, and discover 15 NASA missions.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23cf6a34%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Orbitron:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/space-explorer.css">
+</head>
+<body class="se-body">
+<canvas id="starfield" aria-hidden="true"></canvas>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-mark" aria-hidden="true"></span>
+      <span class="nav-brand-text">Abandoned, But Not Forgotten<small>NASA Space Apps 2026</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="missions.html">Archive</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li><a href="explore.html">Explore</a></li>
+      <li><a href="inspect.html">Inspect</a></li>
+      <li class="nav-more">
+        <button type="button" class="nav-more-btn has-current" aria-expanded="false" aria-haspopup="true" data-i18n="nav.more">More</button>
+        <ul class="nav-more-list">
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="detective.html">Detective</a></li>
+        <li><a href="game.html" aria-current="page">Space Game</a></li>
+        <li><a href="final-signal.html">Final Signal</a></li>
+        <li><a href="data.html">NASA Data</a></li>
+        <li><a href="about.html">About</a></li>
+        </ul>
+      </li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span>
+    </button>
+  </nav>
+</header>
+
+<main id="main" class="se-main">
+<div class="se" id="se-root" role="application" aria-label="Space Explorer: Their Legacy, a 3D exploration game">
+  <canvas id="se-canvas" tabindex="0" aria-label="3D exploration view. Use W A S D or arrow keys to move, Space to jump, E to interact, Escape to pause."></canvas>
+
+  <canvas id="se-intro-fx" class="se-fx" aria-hidden="true"></canvas>
+
+  <!-- intro -->
+  <section class="se-screen se-intro" id="se-intro" aria-labelledby="se-title">
+    <div class="se-card se-hero">
+      <h1 id="se-title"><span class="w" style="--i:0">Space</span> <span class="w" style="--i:1">Explorer</span><small>Their Legacy</small></h1>
+      <p class="se-lead se-rise" style="--d:.55s">Build your own astronaut, walk across the Moon, Mars and deep space, and meet <span id="se-total">15</span> NASA spacecraft that left their mark.</p>
+      <p class="se-welcome se-rise" id="se-welcome" style="--d:.65s" hidden></p>
+      <ul class="se-zonechips" aria-label="Zones">
+        <li class="se-rise" style="--zc:#b9c4ff;--d:.75s">Moon <b id="se-intro-moon"></b></li><li class="se-rise" style="--zc:#ff8f5a;--d:.85s">Mars <b id="se-intro-mars"></b></li><li class="se-rise" style="--zc:#b784ff;--d:.95s">Deep Space <b id="se-intro-deep"></b></li>
+      </ul>
+      <div class="se-trail se-rise" id="se-trail" style="--d:1.05s" role="img" aria-label="Discovery trail"></div>
+      <div class="se-actions se-rise" style="--d:1.15s">
+        <button type="button" class="se-btn se-btn-primary" id="se-start">Start exploring</button>
+        <button type="button" class="se-btn" id="se-new" hidden>New astronaut</button>
+        <a class="se-btn se-btn-ghost" href="index.html">Back to website</a>
+      </div>
+      <p class="se-keys se-rise" style="--d:1.25s" aria-label="Controls"><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> move</span><span><kbd>Space</kbd> jump</span><span><kbd>E</kbd> interact</span><span><kbd>Esc</kbd> pause</span></p>
+      <p class="se-fine se-rise" style="--d:1.35s">Educational project for NASA Space Apps Challenge 2026. Not an official NASA product and not endorsed by NASA. Spacecraft models are stylised, not exact replicas.</p>
+    </div>
+  </section>
+
+  <!-- creator -->
+  <section class="se-screen se-creator" id="se-creator" hidden aria-labelledby="se-cr-title">
+    <div class="se-card se-cr-panel">
+      <h2 id="se-cr-title">Create your astronaut</h2>
+      <div class="se-field"><label for="se-name">Your name</label>
+        <input id="se-name" type="text" maxlength="16" autocomplete="off" spellcheck="false" aria-describedby="se-name-err" placeholder="e.g. Nila">
+        <p class="se-err" id="se-name-err" role="alert"></p></div>
+      <fieldset class="se-field"><legend>Choose your astronaut</legend><div class="se-choices" id="se-gender"></div></fieldset>
+      <fieldset class="se-field"><legend>Suit colour</legend><div class="se-swatches" id="se-suits"></div></fieldset>
+      <div class="se-actions">
+        <button type="button" class="se-btn se-btn-primary" id="se-go">Start Exploration</button>
+        <button type="button" class="se-btn se-btn-ghost" id="se-creator-back">Back</button>
+      </div>
+    </div>
+    <div class="se-prevfb" id="se-prevfb" aria-live="polite"></div>
+  </section>
+
+  <!-- HUD -->
+  <section class="se-hud" id="se-hud" hidden aria-label="Game controls and status">
+    <div class="se-hud-top">
+      <div class="se-hud-card">
+        <div class="se-who"><span class="se-who-label">Explorer</span><b id="se-hud-name"></b></div>
+        <div class="se-zonetag" id="se-zone-tag">Space Hub</div>
+        <div class="se-prog" id="se-prog-bar" role="progressbar" aria-label="Missions discovered" aria-valuemin="0" aria-valuenow="0" aria-valuemax="15"><span id="se-prog-fill"></span></div>
+        <div class="se-prog-text" id="se-prog-text"></div>
+      </div>
+      <div class="se-hud-btns">
+        <button type="button" class="se-btn se-btn-sm" id="se-log-btn">Mission Log</button>
+        <button type="button" class="se-btn se-btn-sm" id="se-hub-btn" hidden>Back to Hub</button>
+        <button type="button" class="se-btn se-btn-sm" id="se-help-btn">Help</button>
+        <button type="button" class="se-btn se-btn-sm" id="se-sound" aria-pressed="false"><span class="se-btn-label">Sound off</span></button>
+        <a class="se-btn se-btn-sm se-btn-ghost" href="index.html">Return to Website</a>
+      </div>
+    </div>
+    <p class="se-zone-note" id="se-zone-note" hidden></p>
+    <div class="se-compass" id="se-compass" hidden><span class="se-compass-arrow" aria-hidden="true">&#10148;</span><span class="se-compass-text"></span></div>
+    <button type="button" class="se-prompt" id="se-prompt" hidden><kbd>E</kbd><span class="se-prompt-text"></span></button>
+    <p class="se-hint" id="se-hint"></p>
+  </section>
+
+  <div class="se-touch" id="se-touch" hidden>
+    <div class="se-joy" id="se-joy" aria-label="Movement joystick"><div class="se-joy-thumb" id="se-joy-thumb"></div></div>
+    <button type="button" class="se-btn se-jump" id="se-jump" aria-label="Jump">Jump</button>
+  </div>
+
+  <!-- simple explorer when 3D is unavailable -->
+  <section class="se-screen se-fallback" id="se-fallback" hidden aria-labelledby="se-fb-title">
+    <div class="se-card se-fb-card">
+      <h2 id="se-fb-title">Explorer base, <span id="se-fb-name"></span></h2>
+      <p class="se-fb-note" id="se-fallback-note" role="status"></p>
+      <p class="se-fb-prog" id="se-fb-prog"></p>
+      <div class="se-actions"><button type="button" class="se-btn se-btn-sm" id="se-fb-log">Mission Log</button><button type="button" class="se-btn se-btn-sm" id="se-retry3d">Try 3D again</button><button type="button" class="se-btn se-btn-sm" id="se-fb-sound">Sound</button><a class="se-btn se-btn-sm se-btn-ghost" href="index.html">Return to Website</a></div>
+      <div class="se-fb-zones" id="se-fb-zones"></div>
+    </div>
+  </section>
+
+  <div class="se-loading" id="se-loading" role="status" aria-live="polite" hidden><div class="se-spinner" aria-hidden="true"></div><p id="se-loading-text">Loading&hellip;</p></div>
+  <div class="se-fade" id="se-fade" aria-hidden="true"></div>
+  <div class="se-toast" id="se-toast" hidden role="status"></div>
+
+  <!-- dialogs -->
+  <div class="se-overlay" id="se-mission" hidden>
+    <article class="se-dlg se-mission" role="dialog" aria-modal="true" aria-labelledby="se-m-title">
+      <header class="se-dlg-head"><span id="se-m-badge"></span><div><span class="se-zone-pill" id="se-m-zone"></span><h2 id="se-m-title"></h2><p id="se-m-sub"></p></div><button type="button" class="se-x" id="se-m-close" aria-label="Close mission panel" data-autofocus>&times;</button></header>
+      <div class="se-dlg-body">
+        <figure class="se-figure"><div id="se-m-img"></div><figcaption id="se-m-credit"></figcaption></figure>
+        <div id="se-m-body"></div>
+      </div>
+      <footer class="se-dlg-foot"><a class="se-btn se-btn-primary" id="se-m-archive" href="missions.html">Learn more in the archive</a><button type="button" class="se-btn" data-close>Keep exploring</button></footer>
+    </article>
+  </div>
+
+  <div class="se-overlay" id="se-log" hidden>
+    <section class="se-dlg" role="dialog" aria-modal="true" aria-labelledby="se-log-title">
+      <header class="se-dlg-head"><div><h2 id="se-log-title">Mission Log</h2><p id="se-log-sum"></p></div><button type="button" class="se-x" data-close aria-label="Close Mission Log" data-autofocus>&times;</button></header>
+      <div class="se-dlg-body" id="se-log-list"></div>
+      <footer class="se-dlg-foot"><button type="button" class="se-btn se-btn-ghost" id="se-reset-open">Reset progress</button><button type="button" class="se-btn se-btn-primary" data-close>Close</button></footer>
+    </section>
+  </div>
+
+  <div class="se-overlay" id="se-help" hidden>
+    <section class="se-dlg se-dlg-sm" role="dialog" aria-modal="true" aria-labelledby="se-help-title">
+      <header class="se-dlg-head"><div><h2 id="se-help-title">Paused: how to play</h2></div><button type="button" class="se-x" data-close aria-label="Resume game" data-autofocus>&times;</button></header>
+      <div class="se-dlg-body">
+        <div class="se-controls">
+          <div><h3>Keyboard</h3><ul><li><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or arrow keys: move</li><li><kbd>Space</kbd>: low-gravity jump</li><li><kbd>Shift</kbd>: move faster</li><li><kbd>E</kbd>: interact</li><li><kbd>Esc</kbd>: pause or close a panel</li><li>Drag with the mouse to turn the camera; scroll to zoom</li></ul></div>
+          <div><h3>Touch</h3><ul><li>Left thumb: joystick</li><li>Drag on the scene to turn the camera</li><li>Tap the glowing button to interact</li><li>Jump button at the bottom right</li></ul></div>
+        </div>
+        <p>Walk to a portal in the Space Hub to visit the Moon, Mars or Deep Space. Walk up to a glowing beam to examine a spacecraft and earn its badge. Missions are grouped by world for learning; they did not all happen in one place. The 3D layout is not to scale.</p>
+      </div>
+      <footer class="se-dlg-foot"><button type="button" class="se-btn se-btn-primary" data-close>Resume</button></footer>
+    </section>
+  </div>
+
+  <div class="se-overlay" id="se-reset" hidden>
+    <section class="se-dlg se-dlg-sm" role="alertdialog" aria-modal="true" aria-labelledby="se-reset-title">
+      <header class="se-dlg-head"><div><h2 id="se-reset-title">Reset your progress?</h2></div></header>
+      <div class="se-dlg-body"><p>This removes all discovery badges and your Mission Log progress on this device. Your astronaut stays. This cannot be undone.</p></div>
+      <footer class="se-dlg-foot"><button type="button" class="se-btn se-btn-ghost" data-close data-autofocus>Cancel</button><button type="button" class="se-btn se-btn-danger" id="se-reset-ok">Reset progress</button></footer>
+    </section>
+  </div>
+
+  <div class="se-overlay" id="se-done" hidden>
+    <section class="se-dlg se-dlg-sm" role="dialog" aria-modal="true" aria-labelledby="se-done-title">
+      <header class="se-dlg-head"><div><h2 id="se-done-title">Mission complete, <span id="se-done-name"></span>!</h2><p>You discovered every mission in the archive.</p></div></header>
+      <div class="se-dlg-body"><div class="se-done-badges" id="se-done-badges"></div><p>Every spacecraft here left something behind: hardware, data or a path for others to follow. Read their full stories in the archive.</p></div>
+      <footer class="se-dlg-foot"><a class="se-btn se-btn-primary" href="missions.html" data-autofocus>Open the archive</a><button type="button" class="se-btn" id="se-done-log">View Mission Log</button><button type="button" class="se-btn se-btn-ghost" data-close>Keep exploring</button></footer>
+    </section>
+  </div>
+  <div class="visually-hidden" id="se-live" aria-live="polite"></div>
+</div>
+<noscript><p class="se-noscript">Space Explorer needs JavaScript. The rest of the archive works without it.</p></noscript>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="nav-brand-text" style="margin-bottom:8px;">NASA SPACE APPS CHALLENGE 2026<small>ABANDONED, BUT NOT FORGOTTEN</small></div>
+        <p style="max-width:40ch;">Every piece of hardware left behind is part of humanity's record of exploration.</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="missions.html">Mission Archive</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="explore.html">Explore Mars</a></li>
+        <li><a href="game.html">Space Explorer 3D</a></li>
+        <li><a href="compare.html">Compare Missions</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="detective.html">Mission Detective</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="data.html">NASA Data &amp; Sources</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="footer-year"></span> &mdash; BUILT FOR NASA SPACE APPS CHALLENGE 2026</span>
+      <span>SOURCES: NASA/JPL &bull; NASA SCIENCE &bull; NASA SOLAR SYSTEM EXPLORATION</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/data-extra.js"></script>
+<script src="js/config.js"></script>
+<script src="js/nasa-api.js"></script>
+<script src="js/svg-icons.js"></script>
+<script src="js/strings-data.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script src="js/space-explorer/se-data.js"></script>
+<script src="js/space-explorer/se-models.js"></script>
+<script src="js/space-explorer/se-world.js"></script>
+<script src="js/space-explorer/se-app.js"></script>
+<script src="js/space-explorer/se-intro-fx.js"></script>
+</body>
+</html>
